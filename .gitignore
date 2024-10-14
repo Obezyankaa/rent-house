@@ -1,0 +1,70 @@
+# Angular specific files
+/dist
+/out-tsc
+/node_modules
+/.angular/cache
+/.angular/cli
+
+# Compiled TypeScript files
+**/*.js
+**/*.d.ts
+**/*.js.map
+
+# IDE specific files
+/.idea
+.project
+.classpath
+.c9/
+*.launch
+.settings/
+/.vscode
+*.code-workspace
+
+# Optional npm cache directory
+.npm
+
+# Optional eslint cache
+.eslintcache
+
+# System specific files
+.DS_Store
+Thumbs.db
+
+# Mac specific
+*.DS_Store
+
+# Windows specific
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Dependency directories
+/node_modules
+/bower_components
+
+# Angular environment files
+/src/environments/environment*.ts
+
+# Production
+/dist
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Angular build output
+/build
+
+# Temporary files
+temp/
+tmp/
+
+# Output of ng-packagr
+/coverage
+/lib
+
+# Miscellaneous
+*.log
+*.bak
+*.tmp
