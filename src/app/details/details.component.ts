@@ -3,11 +3,12 @@ import { CommonModule } from "@angular/common";
 import { ActivatedRoute } from "@angular/router";
 import { HousingService } from "../housing.service";
 import { Housinglocation } from "../housinglocation";
+import { FormControl, FormGroup, ReactiveFormsModule } from "@angular/forms";
 
 @Component({
   selector: "app-details",
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, ReactiveFormsModule],
   template: `
     <article>
       <img
@@ -35,7 +36,17 @@ import { Housinglocation } from "../housinglocation";
       </section>
       <section class="listing-apply">
         <h2 class="section-heading">Apply how to live here</h2>
-        <button class="primary" type="button">Apply now</button>
+        <form [formGroup]="applyForm" (submit)="submitAplication()">
+          <label for="first-name">First name</label>
+          <input type="text" formControlName="firstName" id="first-name" />
+
+          <label for="last-name">Last name</label>
+          <input type="text" formControlName="lastName" id="last-name" />
+
+          <label for="email">email</label>
+          <input type="email" formControlName="email" id="email" />
+          <button type="submit" class="primary">Apply now</button>
+        </form>
       </section>
     </article>
   `,
@@ -45,10 +56,23 @@ export class DetailsComponent {
   route: ActivatedRoute = inject(ActivatedRoute);
   housingService = inject(HousingService);
   housingLocation: Housinglocation | undefined;
+  applyForm = new FormGroup({
+    firstName: new FormControl(""),
+    lastName: new FormControl(""),
+    email: new FormControl(""),
+  });
 
   constructor() {
     const housingLocationId = Number(this.route.snapshot.params["id"]);
     this.housingLocation =
       this.housingService.getHousingLocationById(housingLocationId);
+  }
+
+  submitAplication() {
+    this.housingService.submitAplication(
+      this.applyForm.value.firstName ?? '',
+      this.applyForm.value.lastName ?? '',
+      this.applyForm.value.email ?? '',
+    )
   }
 }
